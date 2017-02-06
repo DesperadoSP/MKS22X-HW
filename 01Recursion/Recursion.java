@@ -5,9 +5,13 @@ public class Recursion{
     public static double sqrt(double n){
 	if (n == 0){
 	    return 0.0;
-	}else{
-	return helper(n, 1);
 	}
+	else if (n < 0){
+	    throw new IllegalArgumentException("Cannot take square root of negatives!");}
+	    else{
+        return helper(n, 1);
+	}
+	
     }
 
     public static double helper(double z, double guess){
@@ -29,7 +33,7 @@ public class Recursion{
 	}
     }
     public static void main(String[]args){
-        System.out.println(sqrt(0.05));
+        System.out.println(sqrt(625));
         
         
     }
