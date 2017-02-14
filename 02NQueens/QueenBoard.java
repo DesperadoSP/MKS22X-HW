@@ -17,14 +17,47 @@ public class QueenBoard{
 
 
     public void countSolutions(){
-   
+	solutionCount = 0;
+        solveC(0);
 
 
 
     }
+    private void solveC(int col){
+	if (col == board.length){
+	    solutionCount ++;
+	    return;
+	}
+	for (int r = 0; r < board.length; r++){
+	    if (board[r][col] == 0) {
+		addQueen(r, col);
+		solveC(col + 1);
+		removeQueen(r, col);
+		
+	    }
+	}
+        
+    }
+    
+
+
+
+    
+
+
+private void clearBoard(){
+    for (int r = 0; r < board.length; r++){
+	for (int c= 0; c< board.length; c++){
+	    board[r][c] = 0;
+	}
+    }
+}
+    
 
     public int getSolutionCount(){
+	clearBoard();
 	return solutionCount;
+        
     }
 
 
@@ -123,7 +156,9 @@ public class QueenBoard{
     }
 
     public static void main(String[]args){
-	QueenBoard q = new QueenBoard(5);
+	QueenBoard q = new QueenBoard(7);
+	q.countSolutions();
+	System.out.println(q.getSolutionCount());
 	q.solve();
 	System.out.println(q);
 
