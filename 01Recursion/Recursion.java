@@ -16,7 +16,7 @@ public class Recursion{
 
     public static double helper(double z, double guess){
 	if (close((guess * guess), z)){
-	    return (double)Math.round(guess * 100) / 100;
+	    return (double)Math.round(guess * 1000000000) / 1000000000;
 	}
 	double a = (z / guess + guess) / 2;
         return helper(z, a);
