@@ -1,14 +1,35 @@
 import java.util.*;
 import java.io.*;
+
 public class Maze{
     private char[][] maze;
     private boolean animate; 
     public Maze(String filename){
-	File infile = new File(filename);
-	Scanner inf = new Scanner(text);
-	int lineNumber = 1;
-	while (inf.hasNextLine()){
-            char line = inf.nextLine();
+	try{
+	animate = false;
+	File zel = new File(filename);
+	Scanner karma = new Scanner(zel);
+        int r = 1;
+	String derp = karma.nextLine();
+	int c = derp.length();
+	while(karma.hasNextLine()){
+	    karma.nextLine();
+	    r++;
+	}
+	maze = new char[r][c];
+	karma = new Scanner(zel);
+	int zz= 0;
+	while(karma.hasNextLine()){
+	    String line = karma.nextLine();
+	    for (int xx = 0; xx < line.length(); xx++){
+		maze[zz][xx] = line.charAt(xx);
+	    }
+	    zz++;
+	}
+	
+	
+	}catch (FileNotFoundException e){
+
 	}
     }
 
@@ -16,15 +37,23 @@ public class Maze{
 	animate = b;
     }
 
+    private void wait(int millis){ //ADDED SORRY!
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+     }
+
     public void clearTerminal(){
 	System.out.println("\033[2J\033[1;1H");
     }
 
     public boolean solve(){
-	int startx, starty;
+	int startx = -1,  starty = -1;
         for(int r = 0; r < maze.length; r++){
 	    for (int c = 0; c < maze[0].length; c++){
-		if (maze[r][c].equals('S')){
+		if (maze[r][c] == 'S'){
 		    startx = r;
 		    starty = c;
 		    break;
@@ -40,11 +69,11 @@ public class Maze{
 	    System.out.println("\033[2J\033[1;1H"+this);
 	    wait(20);
 	}
-        if (maze[x][y].equals('E')){
+        if (maze[x][y] == 'E'){
 	    return true;
 	}
 	else{
-	    if(maze[x][y].equals(' ')){
+	    if(maze[x][y] == ' '){
 		maze[x][y] = '@';
 		if (solve(x + 1, y) || solve(x - 1, y) || solve(x, y + 1) || solve(x, y - 1)){
 		    return true;
