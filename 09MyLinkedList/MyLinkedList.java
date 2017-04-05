@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyLinkedList{
+public class MyLinkedList implements Iterable<Integer>{
     private LNode start, end;
     private int size;
 
@@ -30,17 +30,14 @@ public class MyLinkedList{
 	}
        
         public boolean hasNext(){
-            if ((zel.next == null) || (zel == null)){
-		return false;
-	    }
-	    return true;
+	    return (zel != null);
 	}
 
 	public void remove(){
 	    throw new UnsupportedOperationException();
 	}
 
-	public int next(){
+	public Integer next(){
 	    if (hasNext()){
 		int karma = zel.data;
 		zel = zel.next;
@@ -240,6 +237,9 @@ public class MyLinkedList{
 	System.out.println(a);
 	System.out.println(a.get(3));
 	System.out.println(a.indexOf(2));
+	for (Integer myValue : a){
+	    System.out.println(myValue);
+	}
  }
 }
 	
